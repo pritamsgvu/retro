@@ -1,0 +1,161 @@
+/* Container for the leave component */
+.leave-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Headings */
+  .leave-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #222;
+  }
+  
+  /* Form groups */
+  .leave-container form div {
+    margin-bottom: 18px;
+  }
+  
+  .leave-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+  }
+  
+  /* Input, select, textarea styles */
+  .leave-container input[type="text"],
+  .leave-container input[type="email"],
+  .leave-container input[type="date"],
+  .leave-container select,
+  .leave-container textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease-in-out;
+    resize: vertical;
+  }
+  
+  .leave-container input[type="text"]:focus,
+  .leave-container input[type="email"]:focus,
+  .leave-container input[type="date"]:focus,
+  .leave-container select:focus,
+  .leave-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Buttons */
+  .leave-container button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 22px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .leave-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Table styling */
+  .leave-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .leave-container thead {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .leave-container th,
+  .leave-container td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .leave-container tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+  
+  /* Action buttons in table */
+  .leave-container .btn-approve {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .leave-container .btn-approve:hover {
+    background-color: #1e7e34;
+  }
+  
+  .leave-container .btn-reject {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+  }
+  
+  .leave-container .btn-reject:hover {
+    background-color: #a71d2a;
+  }
+  
+  /* Filter section styling */
+  .leave-container .filter-section {
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .leave-container .filter-section label {
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .leave-container .filter-section input,
+  .leave-container .filter-section select {
+    width: 180px;
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+  
+  /* Responsive tweak */
+  @media (max-width: 600px) {
+    .leave-container .filter-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .leave-container .filter-section input,
+    .leave-container .filter-section select {
+      width: 100%;
+    }
+  }
+  

@@ -1,0 +1,22 @@
+<div class="login-container">
+    <h2>Retro Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label>Email:</label>
+      <input formControlName="email" type="email" placeholder="Enter email" />
+      <div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched" class="error">
+        Valid email required
+      </div>
+      
+  
+      <label>Password:</label>
+      <input formControlName="password" type="password" placeholder="Enter password" />
+      <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="error">
+        Password required
+      </div>
+      
+  
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>
+  

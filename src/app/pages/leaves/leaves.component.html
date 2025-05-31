@@ -1,0 +1,113 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Leave Management</h2>
+
+  <!-- Barber Form -->
+  <form class="row g-3" [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Name</label>
+      <input id="name" formControlName="reason" class="form-control" placeholder="Enter name" required />
+    </div>
+
+    <div class="col-md-6">
+      <label for="mobile" class="form-label">Start Date</label>
+      <input id="mobile" formControlName="startDate" class="form-control" placeholder="Enter start date" required />
+    </div>
+
+    <div class="col-md-6">
+      <label for="aadhar" class="form-label">End Date</label>
+      <input id="aadhar" formControlName="endDate" class="form-control" placeholder="Enter end date" />
+    </div>
+
+
+    <div class="col-12 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        Apply
+      </button>
+    </div>
+  </form>
+
+
+  <!-- ======================================================= -->
+ 
+
+  <h2 class="mb-4 text-center">Leave Filters</h2>
+
+  <div class="row g-3" >
+    <div class="col-12">
+      <label for="name" class="form-label">Employee</label>
+      <select [(ngModel)]="filterEmployee" class="form-control">
+        <option value="">All</option>
+        <option *ngFor="let user of users" [value]="user._id">{{ user.name }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="fd" class="form-label">Start Date</label>
+      <input id="fd" type="date" [(ngModel)]="filterFromDate" class="form-control" placeholder="Enter from date" required />
+    </div>
+
+    <div class="col-md-6">
+      <label for="td" class="form-label">End Date</label>
+      <input id="td" type="date" [(ngModel)]="filterToDate" class="form-control" placeholder="Enter end date" />
+    </div>
+
+
+    <div class="col-12 d-flex gap-2">
+      <button type="button" (click)="applyFilters()" class="btn btn-primary">
+        Apply
+      </button>
+      <button type="button" (click)="resetFilters()" class="btn btn-primary">
+        Reset
+      </button>
+    </div>
+    
+  </div>
+  <!-- ======================================================= -->
+  <!-- Barber List -->
+  <h2 class="mb-4 text-center">Leaves</h2>
+
+  <!-- loader -->
+  <div *ngIf="loading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+
+  <div *ngIf="!loading" class="card mt-5">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Employee</th>
+              <th>Reason</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let leave of filteredLeaves; let i = index">
+              <td>{{ leave.employee?.name }}</td>
+              <td>{{ leave.reason }}</td>
+              <td>{{ leave.startDate | date }}</td>
+              <td>{{ leave.endDate | date }}</td>
+              <td>{{ leave.status }}</td>
+              <td *ngIf="isAdminOrManager">
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-warning" *ngIf="leave.status === 'pending'"
+                    (click)="updateLeaveStatus(leave._id, 'approved')">Approve</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="leave.status === 'pending'"
+                    (click)="updateLeaveStatus(leave._id, 'rejected')">Reject</button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="filteredLeaves.length === 0">
+              <td colspan="7" class="text-center text-muted">No leave available.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+  <div class="container mt-4">
+    <h2 class="mb-4 text-center">Employee Management</h2>
+  
+    <!-- Barber Form -->
+    <form class="row g-3" [formGroup]="addUserForm"  (ngSubmit)="onSubmit()">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" formControlName="name" class="form-control" placeholder="Enter name" required />
+      </div>
+  
+      <div class="col-md-6">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input id="mobile" formControlName="mobile" class="form-control" placeholder="Enter mobile number" required />
+      </div>
+  
+     
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" formControlName="email" class="form-control" placeholder="Enter valid email" />
+      </div>
+
+      <div class="col-md-6">
+        <label for="pass" class="form-label">Password</label>
+        <input id="pass" type="password" formControlName="password" class="form-control" placeholder="Choose password" />
+      </div>
+
+      <div class="col-12">
+        <label for="aadhar" class="form-label">Aadhar</label>
+        <input id="aadhar" formControlName="aadhar" class="form-control" placeholder="Enter Aadhar number" />
+      </div>
+  
+  
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </form>
+  
+    <!-- Barber List -->
+    <h2 class="mb-4 text-center">Employee List</h2>
+  
+     <!-- loader --> 
+     <div *ngIf="loading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  
+    <div *ngIf="!loading" class="card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle">
+            <thead class="">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Aadhar</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.mobile }}</td>
+                <td>{{ user.aadhar }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-warning" (click)="editUser(user)">Edit</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteUser(user._id)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="users.length === 0">
+                <td colspan="7" class="text-center text-muted">No employee available.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
