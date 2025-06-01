@@ -29,7 +29,6 @@ export class UserListComponent implements OnInit {
   loading: boolean = true;
   private apiUrl = environment.apiUrl+ '/users';
 
-
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.addUserForm = this.fb.group({
       name: ['', Validators.required],
@@ -37,7 +36,7 @@ export class UserListComponent implements OnInit {
       aadhar: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', []],
-      role: ['', Validators.required]
+      role: ['employee', Validators.required]
     });
   }
 
@@ -56,7 +55,6 @@ export class UserListComponent implements OnInit {
         error: (err) => {
           this.loading = false;
 
-          console.error('Failed to fetch users', err);
         }
       });
   }
@@ -89,7 +87,6 @@ export class UserListComponent implements OnInit {
             this.addUserForm.reset();
           },
           error: (err) => {
-            console.error('Error adding user:', err);
             alert('Failed to add user.');
           }
         });
@@ -122,7 +119,6 @@ export class UserListComponent implements OnInit {
           this.editingUserId = null;
         },
         error: (err) => {
-          console.error('Error updating user:', err);
           alert('Failed to update user.');
         }
       });
@@ -137,7 +133,6 @@ export class UserListComponent implements OnInit {
             this.users = this.users.filter(u => u._id !== id);
           },
           error: (err) => {
-            console.error('Error deleting user:', err);
             alert('Failed to delete user.');
           }
         });

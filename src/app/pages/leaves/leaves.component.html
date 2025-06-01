@@ -4,18 +4,18 @@
   <!-- Barber Form -->
   <form class="row g-3" [formGroup]="leaveForm" (ngSubmit)="applyLeave()">
     <div class="col-md-6">
-      <label for="name" class="form-label">Name</label>
+      <label for="name" class="form-label">Reason</label>
       <input id="name" formControlName="reason" class="form-control" placeholder="Enter name" required />
     </div>
 
     <div class="col-md-6">
       <label for="mobile" class="form-label">Start Date</label>
-      <input id="mobile" formControlName="startDate" class="form-control" placeholder="Enter start date" required />
+      <input id="mobile" formControlName="startDate" class="form-control" type="date" placeholder="Enter start date" required />
     </div>
 
     <div class="col-md-6">
       <label for="aadhar" class="form-label">End Date</label>
-      <input id="aadhar" formControlName="endDate" class="form-control" placeholder="Enter end date" />
+      <input id="aadhar" formControlName="endDate" class="form-control"  type="date" placeholder="Enter end date" />
     </div>
 
 
@@ -30,7 +30,7 @@
   <!-- ======================================================= -->
  
 
-  <h2 class="mb-4 text-center">Leave Filters</h2>
+  <!-- <h2 class="mb-4 text-center">Leave Filters</h2>
 
   <div class="row g-3" >
     <div class="col-12">
@@ -61,7 +61,7 @@
       </button>
     </div>
     
-  </div>
+  </div> -->
   <!-- ======================================================= -->
   <!-- Barber List -->
   <h2 class="mb-4 text-center">Leaves</h2>
@@ -83,7 +83,7 @@
               <th>From</th>
               <th>To</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th *ngIf="isAdminOrManager">Actions</th>
             </tr>
           </thead>
           <tbody>

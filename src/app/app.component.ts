@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
       }
     });
 
-    console.log('isLoggedIn', this.isLoggedIn);
   }
 
   // Toggle the visibility of the Barber Management sub-menu

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators , ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '.././../../environments/environment';
 
@@ -37,11 +37,21 @@ export class LeaveComponent implements OnInit {
   ngOnInit() {
     this.getLeaves();
     this.getUsers();
+    this.getUserRole();
+  }
+
+  getUserRole() {
+    const session = JSON.parse(localStorage.getItem('user') || '');
+    if (session && session?.role == 'employee') {
+      this.isAdminOrManager = false;
+    } else {
+      this.isAdminOrManager = true;
+    }
   }
 
   applyLeave() {
     if (this.leaveForm.invalid) return alert('Fill all fields');
-    this.http.post(`${this.apiUrl}'/leaves/apply'`, this.leaveForm.value).subscribe({
+    this.http.post(`${this.apiUrl}/leaves/apply`, this.leaveForm.value).subscribe({
       next: (res) => {
         alert('Leave Applied!');
         this.getLeaves();
@@ -71,12 +81,27 @@ export class LeaveComponent implements OnInit {
 
   applyFilters() {
     this.filteredLeaves = this.leaves.filter((leave) => {
-      // const matchEmployee = this.filterEmployee ? leave.employee?._id === this.filterEmployee : true;
-      const matchFrom = this.filterFromDate ? new Date(leave.fromDate) >= new Date(this.filterFromDate) : true;
-      const matchTo = this.filterToDate ? new Date(leave.toDate) <= new Date(this.filterToDate) : true;
-      return matchFrom && matchTo;
+      // Normalize leave dates to yyyy-MM-dd
+      const fromDateStr = leave.fromDate ? leave.fromDate.slice(0, 10) : null;
+      const toDateStr = leave.toDate ? leave.toDate.slice(0, 10) : null;
+      // Employee match (if filter is selected)
+      const matchEmployee = this.filterEmployee
+        ? leave.employee?._id === this.filterEmployee
+        : true;
+
+      // Date filters (compare as strings, since they are in ISO yyyy-MM-dd format)
+      const matchFrom = this.filterFromDate
+        ? fromDateStr >= this.filterFromDate
+        : true;
+
+      const matchTo = this.filterToDate
+        ? toDateStr <= this.filterToDate
+        : true;
+
+      return matchFrom && matchTo && matchEmployee;
     });
   }
+
 
   resetFilters() {
     this.filterEmployee = '';
