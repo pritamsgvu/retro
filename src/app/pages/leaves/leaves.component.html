@@ -95,10 +95,12 @@
               <td>{{ leave.status }}</td>
               <td *ngIf="isAdminOrManager">
                 <div class="d-flex gap-2">
-                  <button class="btn btn-sm btn-warning" *ngIf="leave.status === 'pending'"
+                  <button class="btn btn-sm btn-success" *ngIf="leave.status === 'pending'"
                     (click)="updateLeaveStatus(leave._id, 'approved')">Approve</button>
-                  <button class="btn btn-sm btn-danger" *ngIf="leave.status === 'pending'"
+                  <button class="btn btn-sm btn-warning" *ngIf="leave.status === 'pending'"
                     (click)="updateLeaveStatus(leave._id, 'rejected')">Reject</button>
+                    <button class="btn btn-sm btn-danger" 
+                    (click)="deleteLeave(leave._id)">Delete</button>
                 </div>
               </td>
             </tr>

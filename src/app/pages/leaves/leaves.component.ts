@@ -119,4 +119,14 @@ export class LeaveComponent implements OnInit {
       error: (err) => alert('Error updating status'),
     });
   }
+
+  deleteLeave(leaveId: string) {
+    this.http.delete(`${this.apiUrl}/leaves/delete/${leaveId}`).subscribe({
+      next: (res) => {
+        alert(`Delete Leave ? ${status}`);
+        this.getLeaves();
+      },
+      error: (err) => alert('Error deleting'),
+    });
+  }
 }
