@@ -20,4 +20,9 @@ export const routes: Routes = [
     path: 'leaves',
     loadChildren: () => import('./pages/leaves/leaves.routes').then(m => m.LEAVE_ROUTES)
   },
+
+  {
+    path: 'message',
+    loadChildren: () => import('./pages/message/message.routes').then(m => m.MESSAGE_ROUTES)
+  },
 ];
