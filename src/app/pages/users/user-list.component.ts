@@ -27,6 +27,7 @@ export class UserListComponent implements OnInit {
   editMode: boolean = false;
   editingUserId: string | null = null;
   loading: boolean = true;
+  isAdminOrManager: boolean = false;
   private apiUrl = environment.apiUrl+ '/users';
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
@@ -42,6 +43,16 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.fetchUsers();
+    this.getUserRole();
+  }
+  
+  getUserRole() {
+    const session = JSON.parse(localStorage.getItem('user') || '');
+    if (session && session?.role == 'employee') {
+      this.isAdminOrManager = false;
+    } else {
+      this.isAdminOrManager = true;
+    }
   }
 
   fetchUsers() {
